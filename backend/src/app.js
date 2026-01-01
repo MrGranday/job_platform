@@ -50,13 +50,19 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-// Error Handler Middleware placeholder
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({
-        success: false,
-        error: err.message || 'Server Error'
-    });
+const errorHandler = require('./middlewares/error');
+
+// ... (other imports)
+
+// Routes
+// app.use('/api/v1/auth', require('./routes/auth'));
+// app.use('/api/v1/jobs', require('./routes/jobs'));
+// app.use('/api/v1/users', require('./routes/users'));
+
+app.get('/', (req, res) => {
+  res.send('API is running...');
 });
+
+app.use(errorHandler);
 
 module.exports = app;
